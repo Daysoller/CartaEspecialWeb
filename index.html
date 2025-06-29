@@ -6,13 +6,55 @@
     <title>Carta Especial</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <header><p class="headerText">Hello kidari!</p></header>
-  <body>
+  <body onclick="activarMusicaToque()">
+    <header><p class="headerText">Hello kidari!</p></header>
+
+    <div class="ContainerMusic">
+      <!-- <p class="TextForMusic">Presiona para la musica</p> -->
+      <!-- <div>
+        <button class="BotonConSonido" onclick="activarMusica()">🎵</button>
+      </div> -->
+      <audio id="musica" loop autoplay>
+        <source src="musica.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
     <p class="MainText">
       Hola Kidari, me alegra saber que vamos a intercambiar regalos, espero que
       disfrutes de mi regalo. Aunque no es mucho, lo hice con mucho cariño.
       También espero que nos podamos conocer más en el futuro y así.  Gracias~
     </p>
-    <img src="SpecialDrawFull.jpg" alt="dibujo especial" class="SpecialDraw" />
+
+    <div class="DibujoContainer" onclick="mostrarDibujo()">
+      <img src="SpecialDrawFull.jpg" alt="dibujo especial" class="SpecialDraw" />
+      <div class="CapaOculta" id="capaDibujo">
+        <div class="BotonVer">Ver</div>
+      </div>
+    </div>
+    </div>
+    <script>
+      function activarMusica() {
+        const musica = document.getElementById("musica");
+        const boton = document.querySelector(".BotonConSonido");
+
+        if (musica.paused) {
+          musica.play();
+          boton.classList.add("sonido-activo");
+        } else {
+          musica.pause();
+          boton.classList.remove("sonido-activo");
+        }
+      }
+      function activarMusicaToque() {
+        const musica = document.getElementById("musica");
+        musica.muted = false;
+        musica.play();
+
+        document.body.onclick = null;
+      }
+      function mostrarDibujo() {
+        const capa = document.getElementById("capaDibujo");
+        capa.classList.add("oculto");
+      }
+    </script>
   </body>
 </html>
